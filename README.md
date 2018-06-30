@@ -12,12 +12,12 @@ _Bulk Renaming tool_
 
 ## Installation
 
-| Step | Description | Sample Bash |
-|---|----|----|
-| 1 | Clone the repo | `$ git clone https://github.com/willamin/br` |
-| 2 | Change your directory to it | `$ cd br` |
-| 3 | Build in release mode, retrieving necessary dependencies | `$ shards build --release --production` |
-| 5 | Copy the executable to somewhere in your `PATH` | eg. `$ cp bin/br ~/bin/br` |
+```shell
+git clone https://github.com/willamin/br  # Clone the project
+cd br                                     # Change your directory to it
+shards build --release --production       # Build in release mode
+cp bin/br ~/bin/br                        # Copy the binary to be in your PATH
+```
 
 TODO: Release prebuilt binaries
 
