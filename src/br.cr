@@ -3,14 +3,28 @@ require "tempfile"
 
 module Br
   VERSION = {{ `shards version #{__DIR__}`.chomp.stringify }}
-  VERBOSE = false
+
+  FLAGS   = %w(--dry-run --verbose)
+  ARGS    = ARGV - FLAGS
+  DRY_RUN = (ARGV & FLAGS).includes?("--dry-run")
+  VERBOSE = (ARGV & FLAGS).includes?("--verbose")
 
   class RenameAction
     property from : String?
     property to : String?
 
+    def to_s(io)
+      io << "#{from} -> #{to}"
+    end
+
     def rename!
-      STDERR.puts "#{from} -> #{to}" if VERBOSE
+      if DRY_RUN
+        puts self
+        return
+      elsif VERBOSE
+        STDERR.puts self
+      end
+
       from.try do |from|
         to.try do |to|
           FileUtils.mv(from, to)
