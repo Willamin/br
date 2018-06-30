@@ -17,7 +17,7 @@ module Br
 
   EDITOR = ENV["EDITOR"]? || "vim"
 
-  def verbose(thing)
+  def self.verbose(thing)
     STDERR.puts(thing) if VERBOSE
   end
 
