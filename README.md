@@ -4,11 +4,15 @@ _Bulk Renaming tool_
 
 ## Usage
 
-1. `$ br GLOB [GLOB ...]`
+1. `$ br [OPTIONS] GLOB [GLOB ...]`
 2. Your editor will be opened (or `vim` if `EDITOR` is unset).
 3. Edit the list of file names as you see fit.
 4. Save and close your editor.
 5. Your files will be renamed!
+
+Options:
+- `--dry-run` runs `br` as normal, except renames don't occur. Instead, a description of the renamings is printed.
+- `--verbose` runs `br` as normal, except it prints to STDERR as things happen.
 
 ## Installation
 
