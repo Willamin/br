@@ -32,17 +32,20 @@ module Br
       end
     end
   end
-end
 
-globs = ARGV
-
-globs = globs.map do |dir|
-  if Dir.exists?(dir)
-    File.join(dir, "*")
-  else
-    dir
+  def self.add_star(globs)
+    globs.map do |dir|
+      if Dir.exists?(dir)
+        File.join(dir, "*")
+      else
+        dir
+      end
+    end
   end
 end
+
+globs = Br::ARGS
+globs = Br.add_star(globs)
 
 renames = [] of Br::RenameAction
 
