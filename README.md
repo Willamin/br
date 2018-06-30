@@ -16,7 +16,7 @@ _Bulk Renaming tool_
 |---|----|----|
 | 1 | Clone the repo | `$ git clone https://github.com/willamin/br` |
 | 2 | Change your directory to it | `$ cd br` |
-| 3 | Retrieve dependencies | `$ shards install` |
+| 3 | Retrieve dependencies | `$ shards install --production` |
 | 4 | Build in release mode | `$ shards build --release` |
 | 5 | Copy the executable to somewhere in your `PATH` | eg. `$ cp bin/br ~/bin/br` |
 
