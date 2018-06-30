@@ -17,6 +17,10 @@ module Br
 
   EDITOR = ENV["EDITOR"]? || "vim"
 
+  def verbose(thing)
+    STDERR.puts(thing) if VERBOSE
+  end
+
   class RenameAction
     property from : String?
     property to : String?
@@ -29,8 +33,8 @@ module Br
       if DRY_RUN
         puts self
         return
-      elsif VERBOSE
-        STDERR.puts self
+      else
+        Br.verbose(self)
       end
 
       from.try do |from|
@@ -94,8 +98,16 @@ end
 
 Br::Cli.new.tap_into do
   add_star
+
+  Br.verbose("writing to temp file")
   write_to_temp
+
+  Br.verbose("opening in editor")
   show_editor
+
+  Br.verbose("reading from temp file")
   read_from_temp
+
+  Br.verbose("renaming!")
   rename!
 end
