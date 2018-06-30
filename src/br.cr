@@ -10,10 +10,11 @@ end
 module Br
   VERSION = {{ `shards version #{__DIR__}`.chomp.stringify }}
 
-  FLAGS   = %w(--dry-run --verbose)
-  ARGS    = ARGV - FLAGS
-  DRY_RUN = (ARGV & FLAGS).includes?("--dry-run")
-  VERBOSE = (ARGV & FLAGS).includes?("--verbose")
+  FLAGS           = %w(--dry-run --verbose --version)
+  ARGS            = ARGV - FLAGS
+  DRY_RUN         = (ARGV & FLAGS).includes?("--dry-run")
+  VERBOSE         = (ARGV & FLAGS).includes?("--verbose")
+  VERSION_DISPLAY = (ARGV & FLAGS).includes?("--version")
 
   EDITOR = ENV["EDITOR"]? || "vim"
 
@@ -94,6 +95,11 @@ module Br
       end
     end
   end
+end
+
+if Br::VERSION_DISPLAY
+  puts Br::VERSION
+  exit 0
 end
 
 Br::Cli.new.tap_into do
