@@ -100,7 +100,7 @@ class ReleaseTool
     binary_name = YAML.parse(shard_yml)["targets"].as_h.keys[0]
     archive_name = "br-#{future}-#{LLVM.default_target_triple}.tar.gz"
     `cd bin && tar czf #{archive_name} #{binary_name}`
-    `mkdir -p release && mv #{archive_name} release`
+    `mkdir -p release && mv bin/#{archive_name} release`
     #
 
 
