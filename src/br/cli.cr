@@ -1,3 +1,5 @@
+require "tempfile"
+
 class Br::Cli
   @globs = [] of String
   @renames = [] of Br::RenameAction
