@@ -89,6 +89,7 @@ class ReleaseTool
     end
     file.close
 
+    `git add shard.yml`
     `git commit -m "Prepare for v#{future}"`
     `git tag v#{future} -m v#{future}`
     `git push origin`
