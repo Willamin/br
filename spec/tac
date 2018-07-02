@@ -1,0 +1,12 @@
+#!/usr/bin/env crystal
+filename = ARGV[0]
+
+x =
+  File.read(filename)
+    .lines
+    .map(&.+("-updated"))
+    .join("\n")
+
+file = File.open(filename, mode: "w")
+file.puts(x)
+file.close
