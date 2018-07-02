@@ -9,6 +9,16 @@ module Br
 
   EDITOR = ENV["EDITOR"]? || "vim"
 
+  USAGE = <<-U
+    br v#{VERSION}
+    usage: br [OPTIONS] GLOB [GLOB ...]
+
+    Options:
+    --verbose       be more verbose
+    --dry-run       print dangerous actions instead of doing them
+
+  U
+
   class MissingFrom < Exception; end
 
   class MissingTo < Exception; end
@@ -25,6 +35,13 @@ module Br
     if Br::VERSION_DISPLAY
       puts Br::VERSION
       exit 0
+    end
+  end
+
+  def self.check_no_args
+    if Br::ARGS.size == 0
+      puts Br::USAGE
+      exit 1
     end
   end
 
