@@ -1,6 +1,7 @@
 #!/usr/bin/env cashrun
 
 require "yaml"
+require "llvm"
 
 class CurrentVersionMissing < Exception; end
 
@@ -97,8 +98,9 @@ class ReleaseTool
 
     `shards build --release --no-debug`
     binary_name = YAML.parse(shard_yml)["targets"].as_h.keys[0]
-    `cd bin && tar czf br-v#{future}.tar.gz #{binary_name}`
-    `mkdir -p release && mv bin/br-v#{future}.tar.gz release`
+    archive_name = "br-#{future}-#{LLVM.default_target_triple}.tar.gz"
+    `cd bin && tar czf #{archive_name} #{binary_name}`
+    `mkdir -p release && mv #{archive_name} release`
     #
 
 
