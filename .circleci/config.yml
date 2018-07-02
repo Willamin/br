@@ -3,21 +3,62 @@ version: 2
 jobs:
   build:
     docker:
-      - image: crystallang:crystal
+      - image: crystallang/crystal
     steps:
       - checkout
       - run:
+          name: Install Crystal dependencies
+          command: shards install
+      - run:
           name: Build
-          command: shards build
+          command: shards build --no-debug --release
+      - persist_to_workspace:
+          root: /root/project
+          paths:
+            - .
+
+  test:
+    docker:
+      - image: crystallang/crystal
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run tests
+          command: crystal spec
+
+  release:
+    docker:
+      - image: crystallang/crystal
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Install System dependencies
+          command: apt-get update && apt-get -y install llvm
+      - run:
+          name: Archive binary
+          command: |
+            cd bin;
+            tar czf br.tar.gz br;
+            cd ..;
+      - run:
+          name: Export the archive
+          command: |
+            mkdir -p release;
+            mv bin/br.tar.gz release/br-$(bin/br --version)-$(crystal target-triple.cr).tar.gz;
+      - store_artifacts:
+          path: release
+
 
 workflows:
-  test:
+  version: 2
+  release:
     jobs:
-      test:
-        docker:
-          - image: crystallang:crystal
-        steps:
-          - checkout
-          - run:
-              name: Test
-              command: crystal spec
+      - build
+      - test:
+          requires:
+            - build
+      - release:
+          requires:
+            - test

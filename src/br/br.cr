@@ -1,7 +1,7 @@
 module Br
   VERSION = {{ `shards version #{__DIR__}`.chomp.stringify }}
 
-  FLAGS           = %w(--dry-run --verbose --version)
+  FLAGS           = %w(--dry-run --verbose --version --full-version)
   ARGS            = ARGV - FLAGS
   DRY_RUN         = (ARGV & FLAGS).includes?("--dry-run")
   VERBOSE         = (ARGV & FLAGS).includes?("--verbose")

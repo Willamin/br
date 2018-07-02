@@ -1,11 +1,12 @@
 require "./spec_helper"
 require "file_utils"
-`shards build --no-debug`
 
 def setup
   t = Tempfile.dirname
   spec_dir = File.join(t, "br_spec")
-  FileUtils.rm_r(spec_dir)
+  if Dir.exists?(spec_dir)
+    FileUtils.rm_r(spec_dir)
+  end
   FileUtils.mkdir(spec_dir)
   %w[foo bar baz].each do |name|
     f = File.open(File.join(spec_dir, name), mode: "w")
