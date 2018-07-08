@@ -13,6 +13,7 @@ _Bulk Renaming tool_
 Options:
 - `--dry-run` runs `br` as normal, except renames don't occur. Instead, a description of the renamings is printed.
 - `--verbose` runs `br` as normal, except it prints to STDERR as things happen.
+- `--version` prints the version and exits.
 
 ## Installation
 

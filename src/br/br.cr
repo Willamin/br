@@ -16,6 +16,7 @@ module Br
     Options:
     --verbose       be more verbose
     --dry-run       print dangerous actions instead of doing them
+    --version       print the version and exit
 
   U
 
