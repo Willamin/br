@@ -16,14 +16,18 @@ Options:
 
 ## Installation
 
+1. Download the appropriately prebuilt binary for your architecture from [the releases page](https://github.com/Willamin/br/releases/latest).
+2. Unpack the archive
+3. Move the binary to someplace in your PATH
+
+### Build from source
+
 ```shell
 git clone https://github.com/willamin/br  # Clone the project
 cd br                                     # Change your directory to it
 shards build --release --production       # Build in release mode
 cp bin/br ~/bin/br                        # Copy the binary to be in your PATH
 ```
-
-TODO: Release prebuilt binaries
 
 ## Contributing
 
