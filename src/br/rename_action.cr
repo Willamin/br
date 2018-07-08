@@ -26,7 +26,11 @@ class Br::RenameAction
     {% end %}
 
   def to_s(io)
-    io << "#{from} -> #{to}"
+    if to.blank?
+      io << "#{from} will be deleted"
+    else
+      io << "#{from} -> #{to}"
+    end
   end
 
   def renamable!
@@ -48,7 +52,11 @@ class Br::RenameAction
       Br.verbose(self)
     end
 
-    File.rename(from, to)
+    if to.blank?
+      File.delete(from)
+    else
+      File.rename(from, to)
+    end
   end
 
   def freeze

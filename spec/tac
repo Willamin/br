@@ -5,6 +5,13 @@ x =
   File.read(filename)
     .lines
     .map(&.+("-updated"))
+    .map { |f|
+      if f.includes? "delete-me"
+        ""
+      else
+        f
+      end
+    }
     .join("\n")
 
 file = File.open(filename, mode: "w")
