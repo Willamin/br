@@ -23,12 +23,14 @@ class Br::Cli
   def write_to_temp
     file = File.open(@temp.path, mode: "a")
 
-    Dir.glob(@globs) do |dir|
-      file.puts(dir)
-      ra = Br::RenameAction.new
-      ra.from = dir
-      @renames << ra
-    end
+    Dir.glob(@globs)
+      .sort
+      .each do |dir|
+        file.puts(dir)
+        ra = Br::RenameAction.new
+        ra.from = dir
+        @renames << ra
+      end
 
     file.close
   end
